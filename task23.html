@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Person's Network</title>
+    <script src="https://d3js.org/d3.v5.min.js"></script>
+    <style>
+      .node {
+        fill: #1f77b4;
+      }
+      .label {
+        font-family: Arial, sans-serif;
+        font-size: 12px;
+      }
+    </style>
+  </head>
+  <body>
+    <svg width="600" height="400"></svg>
+    <div>
+      <input id="new-person" type="text" placeholder="Name" />
+      <button id="add-person">Add Person</button>
+    </div>
+    <div>
+      <select id="source-person"></select>
+      <select id="target-person"></select>
+      <button id="add-relation">Add Relation</button>
+    </div>
+    <script>
+      const svg = d3.select("svg");
+      const width = svg.attr("width");
+      const height = svg.attr("height");
+
+      const data = {
+        nodes: [
+          { id: "Alice" },
+          { id: "Bob" },
+          { id: "Charlie" },
+          { id: "Diana" },
+        ],
+        links: [
+          { source: "Alice", target: "Bob" },
+          { source: "Alice", target: "Charlie" },
+          { source: "Bob", target: "Diana" },
+          { source: "Diana", target: "Charlie" },
+        ],
+      };
+
+      const simulation = d3
+        .forceSimulation(data.nodes)
+        .force(
+          "link",
+          d3
+            .forceLink(data.links)
+            .id((d) => d.id)
+            .distance(100)
+        )
+        .force("charge", d3.forceManyBody().strength(-400))
+        .force("center", d3.forceCenter(width / 2, height / 2));
+
+      let link = svg
+        .append("g")
+        .selectAll("line")
+        .data(data.links)
+        .enter()
+        .append("line")
+        .attr("stroke", "#999")
+        .attr("stroke-width", 1.5);
+
+      let node = svg
+        .append("g")
+        .selectAll("circle")
+        .data(data.nodes)
+        .enter()
+        .append("circle")
+        .attr("r", 8)
+        .attr("class", "node");
+
+      let label = svg
+        .append("g")
+        .selectAll("text")
+        .data(data.nodes)
+        .enter()
+        .append("text")
+        .attr("class", "label")
+        .text((d) => d.id);
+
+      function ticked() {
+        link
+          .attr("x1", (d) => d.source.x)
+          .attr("y1", (d) => d.source.y)
+          .attr("x2", (d) => d.target.x)
+          .attr("y2", (d) => d.target.y);
+
+        node.attr("cx", (d) => d.x).attr("cy", (d) => d.y);
+
+        label.attr("x", (d) => d.x + 10).attr("y", (d) => d.y + 5);
+      }
+
+      simulation.on("tick", ticked);
+
+      const addPersonButton = document.getElementById("add-person");
+      const addPersonInput = document.getElementById("new-person");
+      const addRelationButton = document.getElementById("add-relation");
+      const sourcePersonSelect = document.getElementById("source-person");
+      const targetPersonSelect = document.getElementById("target-person");
+
+      function updatePersonSelects() {
+        sourcePersonSelect.innerHTML = "";
+        targetPersonSelect.innerHTML = "";
+        data.nodes.forEach((node) => {
+          const option = document.createElement("option");
+          option.value = node.id;
+          option.text = node.id;
+          sourcePersonSelect.appendChild(option);
+          targetPersonSelect.appendChild(option.cloneNode(true));
+        });
+      }
+
+      updatePersonSelects();
+
+      addPersonButton.addEventListener("click", () => {
+        const newPerson = addPersonInput.value.trim();
+        if (newPerson) {
+          data.nodes.push({ id: newPerson });
+          updatePersonSelects();
+          addPersonInput.value = "";
+          restartSimulation();
+        }
+        console.log(data);
+      });
+
+      addRelationButton.addEventListener("click", () => {
+        const sourcePerson = sourcePersonSelect.value;
+        const targetPerson = targetPersonSelect.value;
+        if (sourcePerson && targetPerson && sourcePerson !== targetPerson) {
+          const existingRelation = data.links.find(
+            (link) =>
+              (link.source === sourcePerson && link.target === targetPerson) ||
+              (link.source === targetPerson && link.target === sourcePerson)
+          );
+          if (!existingRelation) {
+            data.links.push({ source: sourcePerson, target: targetPerson });
+            restartSimulation();
+          } else {
+            alert("This relation already exists.");
+          }
+        }
+      });
+
+      function restartSimulation() {
+        simulation.stop();
+        // Instead of removing and re-adding, update the existing elements
+        simulation.nodes(data.nodes);
+        simulation.force("link").links(data.links);
+
+        // Update links
+        link = link.data(data.links);
+        link.exit().remove(); // Remove any extra links
+        link = link
+          .enter()
+          .append("line")
+          .attr("stroke", "#999")
+          .attr("stroke-width", 1.5)
+          .merge(link); // Merge new links with existing ones
+
+        // Update nodes
+        node = node.data(data.nodes);
+        node.exit().remove(); // Remove any extra nodes
+        node = node
+          .enter()
+          .append("circle")
+          .attr("r", 8)
+          .attr("class", "node")
+          .merge(node); // Merge new nodes with existing ones
+
+        // Update labels
+        label = label.data(data.nodes);
+        label.exit().remove(); // Remove any extra labels
+        label = label
+          .enter()
+          .append("text")
+          .attr("class", "label")
+          .text((d) => d.id)
+          .merge(label); // Merge new labels with existing ones
+
+        // Restart the simulation and re-attach the ticked function
+        simulation.alpha(1).restart();
+        simulation.on("tick", ticked);
+      }
+    </script>
+  </body>
+</html>
