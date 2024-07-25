@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spinning Sun Loader</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: #f0f0f0;
+        }
+
+        .sun-loader {
+            width: 100px;
+            height: 100px;
+            position: relative;
+        }
+
+        .sun-circle {
+            width: 40px;
+            height: 40px;
+            background-color: #ffd700;
+            border-radius: 50%;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            animation: spin 2s linear infinite;
+        }
+
+        .sun-ray {
+            width: 50px;
+            height: 4px;
+            background-color: #ffd700;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform-origin: 0% 50%;
+            animation: spin 2s linear infinite, ray-size 2s linear infinite alternate;
+        }
+
+        .sun-ray:nth-child(even) {
+            width: 30px;
+        }
+
+        @keyframes spin {
+            from {
+                transform: translate(-50%, -50%) rotate(0deg);
+            }
+
+            to {
+                transform: translate(-50%, -50%) rotate(360deg);
+            }
+        }
+
+        @keyframes ray-size {
+            from {
+                transform: translate(-50%, -50%) rotate(0deg) scaleY(1);
+            }
+
+            to {
+                transform: translate(-50%, -50%) rotate(0deg) scaleY(1.2);
+            }
+        }
+
+        /* Positioning the rays */
+        .sun-ray:nth-child(1) {
+            transform: translate(-50%, -50%) rotate(0deg);
+        }
+
+        .sun-ray:nth-child(2) {
+            transform: translate(-50%, -50%) rotate(36deg);
+        }
+
+        .sun-ray:nth-child(3) {
+            transform: translate(-50%, -50%) rotate(72deg);
+        }
+
+        .sun-ray:nth-child(4) {
+            transform: translate(-50%, -50%) rotate(108deg);
+        }
+
+        .sun-ray:nth-child(5) {
+            transform: translate(-50%, -50%) rotate(144deg);
+        }
+
+        .sun-ray:nth-child(6) {
+            transform: translate(-50%, -50%) rotate(180deg);
+        }
+
+        .sun-ray:nth-child(7) {
+            transform: translate(-50%, -50%) rotate(216deg);
+        }
+
+        .sun-ray:nth-child(8) {
+            transform: translate(-50%, -50%) rotate(252deg);
+        }
+
+        .sun-ray:nth-child(9) {
+            transform: translate(-50%, -50%) rotate(288deg);
+        }
+
+        .sun-ray:nth-child(10) {
+            transform: translate(-50%, -50%) rotate(324deg);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="sun-loader">
+        <div class="sun-circle"></div>
+        <div class="sun-ray"></div>
+        <div class="sun-ray"></div>
+        <div class="sun-ray"></div>
+        <div class="sun-ray"></div>
+        <div class="sun-ray"></div>
+        <div class="sun-ray"></div>
+        <div class="sun-ray"></div>
+        <div class="sun-ray"></div>
+        <div class="sun-ray"></div>
+        <div class="sun-ray"></div>
+    </div>
+</body>
+
+</html>

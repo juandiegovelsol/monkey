@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Fashion Show Invitation Manager</title>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Fashion Show Invitation Manager</h1>
+      <form id="invitationForm">
+        <input
+          type="email"
+          id="guestEmail"
+          placeholder="Guest Email"
+          required
+        />
+        <input type="text" id="eventName" placeholder="Event Name" required />
+        <input
+          type="text"
+          id="showDetails"
+          placeholder="Show Details"
+          required
+        />
+        <button type="submit">Send Invitation</button>
+      </form>
+      <div id="invitationList"></div>
+      <div id="responseStats"></div>
+      <div id="eventStats"></div>
+    </div>
+    <script src="script.js"></script>
+  </body>
+</html>

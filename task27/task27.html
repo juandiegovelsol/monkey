@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spinning Sun Loader</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: #f0f0f0;
+        }
+
+        .sun-loader {
+            width: 100px;
+            height: 100px;
+            position: relative;
+            animation: spin 5s linear infinite;
+        }
+
+        .sun-circle {
+            width: 35px;
+            height: 35px;
+            background-color: #ffd700;
+            border-radius: 50%;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .sun-ray {
+            width: 70px;
+            height: 4px;
+            background-color: #ffd700;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform-origin: center;
+        }
+
+        .sun-ray:nth-child(even) {
+            width: 50px;
+        }
+
+        @keyframes spin {
+            from {
+                transform: translate(-50%, -50%) rotate(0deg);
+            }
+
+            to {
+                transform: translate(-50%, -50%) rotate(360deg);
+            }
+        }
+
+        /* Positioning the rays */
+        .sun-ray:nth-of-type(1) {
+            transform: translate(-50%, -50%) rotate(0deg);
+        }
+
+        .sun-ray:nth-of-type(2) {
+            transform: translate(-50%, -50%) rotate(36deg);
+        }
+
+        .sun-ray:nth-of-type(3) {
+            transform: translate(-50%, -50%) rotate(72deg);
+        }
+
+        .sun-ray:nth-of-type(4) {
+            transform: translate(-50%, -50%) rotate(108deg);
+        }
+
+        .sun-ray:nth-of-type(5) {
+            transform: translate(-50%, -50%) rotate(144deg);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="sun-loader">
+        <div class="sun-ray"></div>
+        <div class="sun-ray"></div>
+        <div class="sun-ray"></div>
+        <div class="sun-ray"></div>
+        <div class="sun-ray"></div>
+        <div class="sun-circle"></div>
+    </div>
+</body>
+
+</html>
