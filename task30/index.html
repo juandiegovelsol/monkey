@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Responsive Web Application</title>
+    <style>
+      :root {
+        --header-bg: #f0f0f0;
+        --header-text: #333;
+        --aside-bg: #ddd;
+        --aside-text: #444;
+        --main-bg: #fff;
+        --main-text: #222;
+        --footer-bg: #eee;
+        --footer-text: #555;
+      }
+
+      body {
+        margin: 0;
+        font-family: sans-serif;
+      }
+
+      header {
+        background-color: var(--header-bg);
+        color: var(--header-text);
+        padding: 20px;
+        text-align: center;
+      }
+
+      .container {
+        display: flex;
+      }
+
+      aside {
+        background-color: var(--aside-bg);
+        color: var(--aside-text);
+        width: 25%;
+        padding: 20px;
+        order: 1;
+      }
+
+      main {
+        background-color: var(--main-bg);
+        color: var(--main-text);
+        width: 75%;
+        padding: 20px;
+        order: 2;
+      }
+
+      footer {
+        background-color: var(--footer-bg);
+        color: var(--footer-text);
+        padding: 20px;
+        text-align: center;
+        clear: both;
+      }
+
+      .change-theme {
+        padding: 10px 15px;
+        background-color: #4caf50;
+        color: white;
+        border: none;
+        cursor: pointer;
+      }
+
+      @media screen and (max-width: 768px) {
+        .container {
+          flex-direction: column;
+        }
+
+        aside {
+          width: 100%;
+          order: 3;
+        }
+
+        main {
+          width: 100%;
+          order: 2;
+        }
+      }
+
+      /* Dark Theme */
+      body.dark-theme {
+        --header-bg: #333;
+        --header-text: #fff;
+        --aside-bg: #444;
+        --aside-text: #eee;
+        --main-bg: #222;
+        --main-text: #ddd;
+        --footer-bg: #111;
+        --footer-text: #ccc;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>Responsive Web Application</h1>
+      <button class="change-theme">Change Theme</button>
+    </header>
+
+    <div class="container">
+      <aside>
+        <h2>About This Page</h2>
+        <p>
+          This is a responsive web application built with HTML, CSS, and
+          JavaScript. It demonstrates how to create a layout that adapts to
+          different screen sizes.
+        </p>
+        <ul>
+          <li>Responsive design</li>
+          <li>CSS custom properties</li>
+          <li>JavaScript theme switching</li>
+        </ul>
+      </aside>
+
+      <main>
+        <h2>Main Content</h2>
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do
+          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
+          minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+          aliquip ex ea commodo consequat.
+        </p>
+        <p>
+          Duis aute irure dolor in reprehenderit in voluptate velit esse cillum
+          dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+          proident, sunt in culpa qui officia deserunt mollit anim id est
+          laborum.
+        </p>
+      </main>
+    </div>
+
+    <footer>
+      <p>References and more information can be found here.</p>
+    </footer>
+
+    <script>
+      const changeThemeButton = document.querySelector(".change-theme");
+      const body = document.body;
+
+      changeThemeButton.addEventListener("click", () => {
+        body.classList.toggle("dark-theme");
+      });
+    </script>
+  </body>
+</html>
