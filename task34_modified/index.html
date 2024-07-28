@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Air Conditioner Control</title>
+    <style>
+      body {
+        font-family: sans-serif;
+        display: flex;
+        height: 100vh;
+        width: 100vw;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden;
+      }
+      .container {
+        width: 30%;
+        max-height: 30%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-evenly;
+        height: 100vh;
+      }
+      .controls {
+        display: flex;
+        gap: 20px;
+      }
+      .lateral-controls {
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        justify-content: space-evenly;
+      }
+      .temperature {
+        height: 100%;
+        font-size: 3em;
+        margin-bottom: 20px;
+        display: flex;
+        align-items: center;
+      }
+      .message {
+        color: blue;
+        transition: opacity 0.1s ease-in-out;
+        opacity: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="message" id="message"></div>
+
+      <div class="controls">
+        <div class="lateral-controls">
+          <button id="on">On</button>
+          <button id="off">Off</button>
+        </div>
+        <div class="temperature" id="temperature">25°C</div>
+        <div class="lateral-controls">
+          <button id="increase">+</button>
+          <button id="decrease">-</button>
+        </div>
+      </div>
+      <div>
+        <label for="units">Units:</label>
+        <select id="units">
+          <option value="C">Celsius</option>
+          <option value="F">Fahrenheit</option>
+        </select>
+      </div>
+    </div>
+
+    <script>
+      let temperatureValue = 25; // Initial temperature in Celsius
+      let currentUnit = "C"; // Initial unit
+
+      const temperatureDisplay = document.getElementById("temperature");
+      const messageDisplay = document.getElementById("message");
+      const onButton = document.getElementById("on");
+      const offButton = document.getElementById("off");
+      const increaseButton = document.getElementById("increase");
+      const decreaseButton = document.getElementById("decrease");
+      const unitsSelect = document.getElementById("units");
+
+      function updateTemperatureDisplay() {
+        temperatureDisplay.textContent = `${Math.round(
+          temperatureValue
+        )}${currentUnit}`;
+      }
+
+      function showMessage(message) {
+        messageDisplay.textContent = message;
+        messageDisplay.style.opacity = 1;
+        setTimeout(() => {
+          messageDisplay.style.opacity = 0;
+        }, 1000);
+      }
+
+      function convertToCelsius(fahrenheit) {
+        return (fahrenheit - 32) * (5 / 9);
+      }
+
+      function convertToFahrenheit(celsius) {
+        return (celsius * 9) / 5 + 32;
+      }
+
+      onButton.addEventListener("click", () => {
+        showMessage("On pressed");
+      });
+
+      offButton.addEventListener("click", () => {
+        showMessage("Off pressed");
+      });
+
+      increaseButton.addEventListener("click", () => {
+        temperatureValue++;
+        updateTemperatureDisplay();
+        showMessage("Increase pressed");
+      });
+
+      decreaseButton.addEventListener("click", () => {
+        temperatureValue--;
+        updateTemperatureDisplay();
+        showMessage("Decrease pressed");
+      });
+
+      unitsSelect.addEventListener("change", () => {
+        const newUnit = unitsSelect.value;
+        if (newUnit !== currentUnit) {
+          if (newUnit === "C") {
+            temperatureValue = convertToCelsius(temperatureValue);
+          } else {
+            temperatureValue = convertToFahrenheit(temperatureValue);
+          }
+          currentUnit = newUnit;
+          updateTemperatureDisplay();
+        }
+      });
+
+      updateTemperatureDisplay();
+    </script>
+  </body>
+</html>
