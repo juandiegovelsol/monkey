@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+      *,
+      *::after {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        align-items: center;
+
+        min-height: 100vh;
+        padding: 20px;
+      }
+
+      .title-level {
+        --t: calc(var(--td) + var(--d));
+        color: transparent;
+        padding: 4px;
+        position: relative;
+        overflow: hidden;
+        animation: revealBlock 0s var(--t) forwards;
+      }
+
+      .title-level::after {
+        content: "";
+        padding-bottom: 4px;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 0%;
+        height: 100%;
+        background: var(--bc);
+        animation: slideIn var(--td) var(--d) forwards,
+          slideOut var(--td) var(--t) forwards;
+      }
+
+      @keyframes revealBlock {
+        100% {
+          color: #0f0f0f;
+        }
+      }
+
+      @keyframes slideIn {
+        0% {
+          width: 0%;
+        }
+        100% {
+          width: 100%;
+        }
+      }
+      @keyframes slideOut {
+        0% {
+          transform: translateX(0);
+        }
+
+        100% {
+          transform: translateX(100%);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <h1 class="title-container" style="--td: 1.2s">
+      <div class="title-level" style="--bc: #f00; --d: 1.1s">Level 1 Title</div>
+      <div class="title-level" style="--bc: #0f0; --d: 3.1s">Level 2 Title</div>
+    </h1>
+  </body>
+</html>

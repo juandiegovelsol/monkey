@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+      .title-container {
+        position: relative;
+        width: 500px; /* Adjust width as needed */
+        height: 100px; /* Adjust height as needed */
+        overflow: hidden;
+      }
+
+      .title-level {
+        position: absolute;
+        width: 100%;
+        height: 50%; /* Adjust height for each level */
+        line-height: 50px; /* Adjust line height for vertical centering */
+        text-align: center;
+      }
+
+      .title-level-1 {
+        top: 0;
+      }
+
+      .title-level-2 {
+        bottom: 0;
+      }
+
+      .sliding-block {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: #f00; /* Color for level 1 sliding block */
+        animation: slideLeft 2s linear infinite;
+      }
+
+      .title-level-2 .sliding-block {
+        background-color: #0f0; /* Color for level 2 sliding block */
+        animation-delay: 2s; /* Delay for level 2 sliding block */
+      }
+
+      @keyframes slideLeft {
+        0% {
+          left: 0;
+        }
+        100% {
+          left: 100%;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="title-container">
+      <div class="title-level title-level-1">
+        <div class="sliding-block"></div>
+        Level 1 Title
+      </div>
+      <div class="title-level title-level-2">
+        <div class="sliding-block"></div>
+        Level 2 Title
+      </div>
+    </div>
+  </body>
+</html>

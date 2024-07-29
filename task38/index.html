@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+      .button {
+        position: relative;
+        display: inline-block;
+        padding: 15px 30px;
+        border: 2px solid #008cba;
+        color: #008cba;
+        background-color: transparent;
+        cursor: pointer;
+        transition: 0.3s;
+        overflow: hidden;
+      }
+
+      .button::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: #008cba;
+        transform: scaleX(0);
+        transition: transform 0.3s ease-in-out;
+      }
+
+      .button:hover {
+        color: white;
+      }
+
+      .button:hover::before {
+        transform: scaleX(1);
+      }
+
+      /* Slide Down Effect */
+      .slide-down::before {
+        transform-origin: top;
+      }
+
+      /* Slide Right Effect */
+      .slide-right::before {
+        transform-origin: left;
+      }
+
+      /* Slide Outside to Inside Effect */
+      .slide-outside-in::before {
+        transform: scale(0);
+        transform-origin: center;
+      }
+
+      .slide-outside-in:hover::before {
+        transform: scale(1);
+      }
+
+      /* Slide Diagonal Effect */
+      .slide-diagonal::before {
+        transform-origin: top left;
+      }
+    </style>
+  </head>
+  <body>
+    <h2>Button Effects</h2>
+
+    <button class="button slide-down">Slide Down</button>
+    <button class="button slide-right">Slide Right</button>
+    <button class="button slide-outside-in">Outside to Inside</button>
+    <button class="button slide-diagonal">Diagonal</button>
+  </body>
+</html>

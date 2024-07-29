@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+      .button {
+        position: relative;
+        display: inline-block;
+        padding: 15px 30px;
+        border: 2px solid #008cba;
+        color: #008cba;
+        background-color: transparent;
+        cursor: pointer;
+        transition: ease-out 0.5s;
+        box-shadow: inset 0 0 0 0 #008cba;
+      }
+
+      .button:hover {
+        color: white;
+      }
+
+      /* Slide Down Effect */
+      .slide-down:hover {
+        box-shadow: inset 0 100px 0 0 #008cba;
+      }
+
+      /* Slide Right Effect */
+      .slide-right:hover {
+        box-shadow: inset 400px 0 0 0 #008cba;
+      }
+
+      /* Slide Outside to Inside Effect */
+      .slide-outside-in:hover {
+        box-shadow: inset 0 0 0 50px #008cba;
+      }
+
+      /* Slide Diagonal Effect */
+      .slide-diagonal:hover {
+        box-shadow: inset 400px 100px 0 0 #008cba;
+      }
+    </style>
+  </head>
+  <body>
+    <h2>Button Effects</h2>
+    <button class="button slide-down">Slide Down</button>
+    <button class="button slide-right">Slide Right</button>
+    <button class="button slide-outside-in">Outside to Inside</button>
+    <button class="button slide-diagonal">Diagonal</button>
+  </body>
+</html>
