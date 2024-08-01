@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+      body {
+        background-color: black;
+      }
+
+      .container {
+        width: fit-content;
+        margin: 100px auto;
+        position: relative;
+      }
+
+      .bracket {
+        font-size: 4em;
+        font-weight: bold;
+        color: red;
+        animation: blink 1s infinite;
+      }
+
+      @keyframes blink {
+        0%,
+        100% {
+          opacity: 1;
+        }
+        50% {
+          opacity: 0;
+        }
+      }
+
+      .message {
+        font-size: 2em;
+        color: white;
+        margin: 0 10px;
+        white-space: nowrap;
+      }
+
+      .scroll-up {
+        animation: scroll 3s linear infinite;
+      }
+
+      @keyframes scroll {
+        0% {
+          transform: translateY(0);
+        }
+        50% {
+          transform: translateY(-2em);
+        }
+        100% {
+          transform: translateY(0);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <span class="bracket">[</span>
+      <div class="message">
+        Welcome
+        <span class="scroll-up">
+          <span>users</span>
+          <span>everyone</span>
+          <span>visitors</span>
+          <span>friends</span>
+          <span>people</span>
+        </span>
+      </div>
+      <span class="bracket">]</span>
+    </div>
+  </body>
+</html>

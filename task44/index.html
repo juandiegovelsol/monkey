@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+      .button {
+        width: 200px;
+        height: 50px;
+        background-color: transparent;
+        border: 2px solid #46c2cb;
+        color: #46c2cb;
+        padding: 15px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        border-radius: 25px;
+        cursor: pointer;
+        transition: all 0.5s ease; /* Smooth transition for all changes */
+      }
+
+      .button.clicked {
+        width: 50px;
+        border-radius: 50%; /* Change to circular shape */
+        background-color: #46c2cb; /* Fill background with border color */
+        padding: 0;
+      }
+
+      .button::before {
+        content: "Click Me";
+      }
+
+      .button.clicked::before {
+        content: "\2713"; /* Unicode character for checkmark */
+        font-size: 20px;
+        color: rgba(255, 255, 255, 0.8); /* Semi-transparent white checkmark */
+      }
+    </style>
+  </head>
+  <body>
+    <button class="button"></button>
+
+    <script>
+      const button = document.querySelector(".button");
+
+      button.addEventListener("click", () => {
+        button.classList.add("clicked");
+        setTimeout(() => button.classList.remove("clicked"), 2000);
+      });
+    </script>
+  </body>
+</html>

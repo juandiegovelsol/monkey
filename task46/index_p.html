@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Drawing Editor</title>
+    <style>
+      #sketchCanvas {
+        border: 1px solid black;
+      }
+    </style>
+  </head>
+  <body>
+    <canvas id="sketchCanvas" width="500" height="500"></canvas>
+    <button id="revertButton">Revert</button>
+    <button id="redoButton">Redo</button>
+    <script>
+      const sketchCanvas = document.getElementById("sketchCanvas");
+      const sketchContext = sketchCanvas.getContext("2d");
+      let drawingHistory = [];
+      let redoDrawingStack = [];
+      let currentLine = [];
+
+      sketchCanvas.addEventListener("mousedown", (e) => {
+        const { offsetX, offsetY } = e;
+        currentLine = [[offsetX, offsetY]];
+      });
+
+      sketchCanvas.addEventListener("mousemove", (e) => {
+        const { offsetX, offsetY } = e;
+        currentLine.push([offsetX, offsetY]);
+        redrawCanvas();
+      });
+
+      sketchCanvas.addEventListener("mouseup", () => {
+        drawingHistory.push([...currentLine]);
+        redoDrawingStack = [];
+      });
+
+      document.getElementById("revertButton").addEventListener("click", () => {
+        if (drawingHistory.length > 0) {
+          redoDrawingStack.push(drawingHistory.pop());
+          redrawCanvas();
+        }
+      });
+
+      document.getElementById("redoButton").addEventListener("click", () => {
+        if (redoDrawingStack.length > 0) {
+          drawingHistory.push(redoDrawingStack.pop());
+          redrawCanvas();
+        }
+      });
+
+      function redrawCanvas() {
+        sketchContext.clearRect(0, 0, sketchCanvas.width, sketchCanvas.height);
+        drawingHistory.forEach((line) => drawLine(line));
+        drawLine(currentLine);
+      }
+
+      function drawLine(line) {
+        if (line.length < 2) return;
+        sketchContext.beginPath();
+        sketchContext.moveTo(line[0][0], line[0][1]);
+        line.forEach((point) => sketchContext.lineTo(point[0], point[1]));
+        sketchContext.stroke();
+      }
+    </script>
+  </body>
+</html>

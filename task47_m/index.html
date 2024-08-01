@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+      .heart-list {
+        list-style: none;
+        padding: 0;
+      }
+
+      .list-item {
+        padding-left: 20px;
+        position: relative;
+      }
+
+      .list-item::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 10px;
+        height: 10px;
+        background-color: red;
+        animation: heartbeat 1s infinite;
+        clip-path: polygon(
+          50% 50%,
+          55% 35%,
+          58% 32%,
+          60% 30%,
+          68% 29%,
+          72% 32%,
+          74% 43%,
+          73% 56%,
+          69% 68%,
+          61% 78%,
+          50% 86%,
+          39% 78%,
+          31% 68%,
+          27% 56%,
+          26% 43%,
+          28% 32%,
+          32% 29%,
+          40% 30%,
+          42% 32%,
+          45% 35%,
+          50% 50%
+        );
+      }
+
+      @keyframes heartbeat {
+        0% {
+          transform: translateY(-50%) scale(1);
+        }
+        50% {
+          transform: translateY(-50%) scale(1.5);
+        }
+        100% {
+          transform: translateY(-50%) scale(1);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <h2>Heart List</h2>
+
+    <ul class="heart-list">
+      <li class="list-item">List item 1</li>
+      <li class="list-item">List item 2</li>
+      <li class="list-item">List item 3</li>
+    </ul>
+  </body>
+</html>
