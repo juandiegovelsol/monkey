@@ -1,0 +1,42 @@
+body {
+  font-family: sans-serif;
+}
+
+.progress-container {
+  width: 100%;
+  background-color: #e0e0e0;
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+.progress-bar {
+  height: 20px;
+  width: 0%;
+  background-color: white;
+  transition: width 0.5s ease-in-out; /* Smooth transition for width changes */
+}
+
+.progress-bar.red {
+  background-color: red;
+}
+
+.progress-bar.orange {
+  background-color: orange;
+}
+
+.progress-bar.yellow {
+  background-color: yellow;
+}
+
+.progress-bar.green {
+  background-color: green;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+li {
+  margin-bottom: 10px;
+}
